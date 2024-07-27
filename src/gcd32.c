@@ -32,13 +32,11 @@ unsigned long int gcd32(unsigned long int u, unsigned long int v)
 	while (u != v) {
 		if (u > v) {
 			u -= v;
-
 			do {
 				u >>= 1;
 			} while ((u & 1uL) == 0uL);
 		} else {
 			v -= u;
-
 			do {
 				v >>= 1;
 			} while ((v & 1uL) == 0uL);
