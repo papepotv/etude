@@ -4,6 +4,7 @@
  *
  * References:
  * - https://en.wikipedia.org/wiki/Cyclic_redundancy_check
+ * - https://www.nist.gov/dads/HTML/cyclicRedundancyCheck.html
  * - https://www.mathpages.com/home/kmath458.htm
  * - http://www.ross.net/crc/download/crc_v3.txt
  * - isbn-13:978-0-321-84268-8

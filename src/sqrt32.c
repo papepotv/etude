@@ -4,6 +4,7 @@
  *
  * References:
  * - https://en.wikipedia.org/wiki/Integer_square_root
+ * - https://www.nist.gov/dads/HTML/squareRoot.html
  * - isbn-13:978-0-321-84268-8
  */
 

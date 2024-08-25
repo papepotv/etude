@@ -4,6 +4,7 @@
  *
  * References:
  * - https://en.wikipedia.org/wiki/Gray_code
+ * - https://www.nist.gov/dads/HTML/graycode.html
  * - isbn-13:978-0-321-84268-8
  */
 

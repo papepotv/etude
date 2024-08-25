@@ -4,6 +4,7 @@
  *
  * References:
  * - https://en.wikipedia.org/wiki/Binary_GCD_algorithm
+ * - https://www.nist.gov/dads/HTML/binaryGCD.html
  */
 
 #include "gcd32.h"

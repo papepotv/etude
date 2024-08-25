@@ -77,7 +77,7 @@ static void test_gcd32(void)
 
 static int popcount_is_one(unsigned long int u)
 {
-	/* isbn-13:978-0-321-84268-8 */
+	/* https://ptgmedia.pearsoncmg.com/images/9780321842688/samplepages/0321842685.pdf */
 	return u != 0uL && (u & (u - 1uL)) == 0uL;
 }
 
