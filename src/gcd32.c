@@ -10,15 +10,16 @@
 
 unsigned long int gcd32(unsigned long int u, unsigned long int v)
 {
-	int w;
+	int w = 0;
 
 	if (u == 0uL || v == 0uL) {
 		return u | v;
 	}
 
-	for (w = 0; ((u | v) & 1uL) == 0uL; w++) {
+	while (((u | v) & 1uL) == 0uL) {
 		u >>= 1;
 		v >>= 1;
+		w += 1;
 	}
 
 	while ((u & 1uL) == 0uL) {
