@@ -20,6 +20,10 @@
 
 static void test_crc16(void)
 {
+	assert(crc16(0u, NULL, 0) == 0u);
+	assert(crc16(42u, NULL, 0) == 42u);
+	assert(crc16(42u, NULL, 9) == 42u);
+	assert(crc16(42u, "123456789", 0) == 42u);
 #if CRC16_GP == 0xA001u
 	/* https://modbus.org/docs/Modbus_over_serial_line_V1_02.pdf */
 	assert(crc16(0xFFFFu, "\x02\x07", 2) == 0x1241u);
@@ -39,6 +43,10 @@ static void test_crc16(void)
 
 static void test_crc32(void)
 {
+	assert(crc32(0uL, NULL, 0) == 0uL);
+	assert(crc32(42uL, NULL, 0) == 42uL);
+	assert(crc32(42uL, NULL, 9) == 42uL);
+	assert(crc32(42uL, "123456789", 0) == 42uL);
 #if CRC32_GP == 0xD8018001uL
 	/* https://reveng.sourceforge.io/crc-catalogue/17plus.htm#crc.cat.crc-32-cd-rom-edc */
 	assert(crc32(0uL, "123456789", 9) == 0x6EC2EDC4uL);

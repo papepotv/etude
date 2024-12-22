@@ -56,10 +56,12 @@ static const unsigned int table[0x100] = {
 
 unsigned int crc16(unsigned int crc, const void *message, size_t length)
 {
-	const unsigned char *p = message;
+	if (message) {
+		const unsigned char *p = message;
 
-	while (length--) {
-		crc = (crc >> 010) ^ table[(crc ^ *p++) & 0xFFu];
+		while (length--) {
+			crc = (crc >> 010) ^ table[(crc ^ *p++) & 0xFFu];
+		}
 	}
 
 	return crc;
