@@ -12,9 +12,9 @@
 
 unsigned long int sqrt32(unsigned long int square)
 {
-	unsigned long int bit, root = 0uL;
+	unsigned long int root = 0uL;
 
-	for (bit = (1uL << (040 - 2)); bit != 0uL; bit >>= 2) {
+	for (unsigned long int bit = 1uL << (040 - 2); bit != 0uL; bit >>= 2) {
 		unsigned long int delta = root | bit;
 
 		root >>= 1;
