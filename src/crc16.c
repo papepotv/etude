@@ -35,14 +35,14 @@
 #define CRC0(n) XOR(XOR(XOR(XOR(XOR(XOR(XOR(XOR(n))))))))
 #endif
 
-#define CRC1(n) CRC0(n), CRC0((n) + (0x01u << 0))
-#define CRC2(n) CRC1(n), CRC1((n) + (0x01u << 1))
-#define CRC3(n) CRC2(n), CRC2((n) + (0x01u << 2))
-#define CRC4(n) CRC3(n), CRC3((n) + (0x01u << 3))
-#define CRC5(n) CRC4(n), CRC4((n) + (0x01u << 4))
-#define CRC6(n) CRC5(n), CRC5((n) + (0x01u << 5))
-#define CRC7(n) CRC6(n), CRC6((n) + (0x01u << 6))
-#define CRC8(n) CRC7(n), CRC7((n) + (0x01u << 7))
+#define CRC1(n) CRC0(n), CRC0((n) ^ (0x01u << 0))
+#define CRC2(n) CRC1(n), CRC1((n) ^ (0x01u << 1))
+#define CRC3(n) CRC2(n), CRC2((n) ^ (0x01u << 2))
+#define CRC4(n) CRC3(n), CRC3((n) ^ (0x01u << 3))
+#define CRC5(n) CRC4(n), CRC4((n) ^ (0x01u << 4))
+#define CRC6(n) CRC5(n), CRC5((n) ^ (0x01u << 5))
+#define CRC7(n) CRC6(n), CRC6((n) ^ (0x01u << 6))
+#define CRC8(n) CRC7(n), CRC7((n) ^ (0x01u << 7))
 
 static const unsigned int table[0x100] = { CRC8(0x00u) };
 
