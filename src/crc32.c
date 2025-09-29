@@ -21,15 +21,15 @@
 #define XOR5(n) (XOR4(n) ^ ((n) >> 5))
 #define XOR6(n) (XOR5(n) ^ ((n) >> 6))
 #define XOR7(n) (XOR6(n) ^ ((n) >> 7))
-#define CRC0(n) \
-	((-(XOR0(n) & 1uL) & (CRC32_GP >> 7)) ^ \
-	 (-(XOR1(n) & 1uL) & (CRC32_GP >> 6)) ^ \
-	 (-(XOR2(n) & 1uL) & (CRC32_GP >> 5)) ^ \
-	 (-(XOR3(n) & 1uL) & (CRC32_GP >> 4)) ^ \
-	 (-(XOR4(n) & 1uL) & (CRC32_GP >> 3)) ^ \
-	 (-(XOR5(n) & 1uL) & (CRC32_GP >> 2)) ^ \
-	 (-(XOR6(n) & 1uL) & (CRC32_GP >> 1)) ^ \
-	 (-(XOR7(n) & 1uL) & (CRC32_GP >> 0)))
+#define CRC0(n) (0x00000000uL \
+	^ (-(XOR0(n) & 1uL) & (CRC32_GP >> 7)) \
+	^ (-(XOR1(n) & 1uL) & (CRC32_GP >> 6)) \
+	^ (-(XOR2(n) & 1uL) & (CRC32_GP >> 5)) \
+	^ (-(XOR3(n) & 1uL) & (CRC32_GP >> 4)) \
+	^ (-(XOR4(n) & 1uL) & (CRC32_GP >> 3)) \
+	^ (-(XOR5(n) & 1uL) & (CRC32_GP >> 2)) \
+	^ (-(XOR6(n) & 1uL) & (CRC32_GP >> 1)) \
+	^ (-(XOR7(n) & 1uL) & (CRC32_GP >> 0)))
 #else
 #define XOR(a) (((a) >> 1) ^ (-((a) & 1uL) & CRC32_GP))
 #define CRC0(n) XOR(XOR(XOR(XOR(XOR(XOR(XOR(XOR(n))))))))
