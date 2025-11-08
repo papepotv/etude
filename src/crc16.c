@@ -12,7 +12,7 @@
 
 #include "crc16.h"
 
-#if (CRC16_GP & 0x7Fu) == 0x01u
+#if (CRC16_POLY & 0x7Fu) == 0x01u
 #define XOR0(n) ((0x00u) ^ ((n) >> 0))
 #define XOR1(n) (XOR0(n) ^ ((n) >> 1))
 #define XOR2(n) (XOR1(n) ^ ((n) >> 2))
@@ -22,16 +22,16 @@
 #define XOR6(n) (XOR5(n) ^ ((n) >> 6))
 #define XOR7(n) (XOR6(n) ^ ((n) >> 7))
 #define CRC0(n) (0x0000u \
-	^ (-(XOR0(n) & 1u) & (CRC16_GP >> 7)) \
-	^ (-(XOR1(n) & 1u) & (CRC16_GP >> 6)) \
-	^ (-(XOR2(n) & 1u) & (CRC16_GP >> 5)) \
-	^ (-(XOR3(n) & 1u) & (CRC16_GP >> 4)) \
-	^ (-(XOR4(n) & 1u) & (CRC16_GP >> 3)) \
-	^ (-(XOR5(n) & 1u) & (CRC16_GP >> 2)) \
-	^ (-(XOR6(n) & 1u) & (CRC16_GP >> 1)) \
-	^ (-(XOR7(n) & 1u) & (CRC16_GP >> 0)))
+	^ (-(XOR0(n) & 1u) & (CRC16_POLY >> 7)) \
+	^ (-(XOR1(n) & 1u) & (CRC16_POLY >> 6)) \
+	^ (-(XOR2(n) & 1u) & (CRC16_POLY >> 5)) \
+	^ (-(XOR3(n) & 1u) & (CRC16_POLY >> 4)) \
+	^ (-(XOR4(n) & 1u) & (CRC16_POLY >> 3)) \
+	^ (-(XOR5(n) & 1u) & (CRC16_POLY >> 2)) \
+	^ (-(XOR6(n) & 1u) & (CRC16_POLY >> 1)) \
+	^ (-(XOR7(n) & 1u) & (CRC16_POLY >> 0)))
 #else
-#define XOR(a) (((a) >> 1) ^ (-((a) & 1u) & CRC16_GP))
+#define XOR(a) (((a) >> 1) ^ (-((a) & 1u) & CRC16_POLY))
 #define CRC0(n) XOR(XOR(XOR(XOR(XOR(XOR(XOR(XOR(n))))))))
 #endif
 

@@ -24,7 +24,7 @@ static void test_crc16(void)
 	assert(crc16(42u, NULL, 0) == 42u);
 	assert(crc16(42u, NULL, 9) == 42u);
 	assert(crc16(42u, "123456789", 0) == 42u);
-#if CRC16_GP == 0xA001u
+#if CRC16_POLY == 0xA001u
 	/* https://modbus.org/docs/Modbus_over_serial_line_V1_02.pdf */
 	assert(crc16(0xFFFFu, "\x02\x07", 2) == 0x1241u);
 	assert(crc16(0xFFFFu, "\x02\x07\x41\x12", 4) == 0u);
@@ -33,7 +33,7 @@ static void test_crc16(void)
 	assert(crc16(0xFFFFu, "123456789\xC8\xB4", 11) == 0xB001u);
 	assert(crc16(0u, "\xFF\xFF", 2) == 0xB001u);
 #endif
-#if CRC16_GP == 0x8408u
+#if CRC16_POLY == 0x8408u
 	/* https://reveng.sourceforge.io/crc-catalogue/16.htm#crc.cat.crc-16-ibm-sdlc */
 	assert((crc16(0xFFFFu, "123456789", 9) ^ 0xFFFFu) == 0x906Eu);
 	assert(crc16(0xFFFFu, "123456789\x6E\x90", 11) == 0xF0B8u);
@@ -47,12 +47,12 @@ static void test_crc32(void)
 	assert(crc32(42uL, NULL, 0) == 42uL);
 	assert(crc32(42uL, NULL, 9) == 42uL);
 	assert(crc32(42uL, "123456789", 0) == 42uL);
-#if CRC32_GP == 0xD8018001uL
+#if CRC32_POLY == 0xD8018001uL
 	/* https://reveng.sourceforge.io/crc-catalogue/17plus.htm#crc.cat.crc-32-cd-rom-edc */
 	assert(crc32(0uL, "123456789", 9) == 0x6EC2EDC4uL);
 	assert(crc32(0uL, "123456789\xC4\xED\xC2\x6E", 13) == 0uL);
 #endif
-#if CRC32_GP == 0xEDB88320uL
+#if CRC32_POLY == 0xEDB88320uL
 	/* https://reveng.sourceforge.io/crc-catalogue/17plus.htm#crc.cat.crc-32-iso-hdlc */
 	assert((crc32(0xFFFFFFFFuL, "123456789", 9) ^ 0xFFFFFFFFuL) == 0xCBF43926uL);
 	assert(crc32(0xFFFFFFFFuL, "123456789\x26\x39\xF4\xCB", 13) == 0xDEBB20E3uL);
