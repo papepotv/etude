@@ -13,38 +13,39 @@
 #include "crc16.h"
 
 #if (CRC16_POLY & 0x7Fu) == 0x01u
-#define XOR0(n) ((0x00u) ^ ((n) >> 0))
-#define XOR1(n) (XOR0(n) ^ ((n) >> 1))
-#define XOR2(n) (XOR1(n) ^ ((n) >> 2))
-#define XOR3(n) (XOR2(n) ^ ((n) >> 3))
-#define XOR4(n) (XOR3(n) ^ ((n) >> 4))
-#define XOR5(n) (XOR4(n) ^ ((n) >> 5))
-#define XOR6(n) (XOR5(n) ^ ((n) >> 6))
-#define XOR7(n) (XOR6(n) ^ ((n) >> 7))
-#define CRC0(n) (0x0000u \
-	^ (-(XOR0(n) & 1u) & (CRC16_POLY >> 7)) \
-	^ (-(XOR1(n) & 1u) & (CRC16_POLY >> 6)) \
-	^ (-(XOR2(n) & 1u) & (CRC16_POLY >> 5)) \
-	^ (-(XOR3(n) & 1u) & (CRC16_POLY >> 4)) \
-	^ (-(XOR4(n) & 1u) & (CRC16_POLY >> 3)) \
-	^ (-(XOR5(n) & 1u) & (CRC16_POLY >> 2)) \
-	^ (-(XOR6(n) & 1u) & (CRC16_POLY >> 1)) \
-	^ (-(XOR7(n) & 1u) & (CRC16_POLY >> 0)))
+#define XOR_0(n) (0x00u    ^ ((n) >> 0))
+#define XOR_1(n) (XOR_0(n) ^ ((n) >> 1))
+#define XOR_2(n) (XOR_1(n) ^ ((n) >> 2))
+#define XOR_3(n) (XOR_2(n) ^ ((n) >> 3))
+#define XOR_4(n) (XOR_3(n) ^ ((n) >> 4))
+#define XOR_5(n) (XOR_4(n) ^ ((n) >> 5))
+#define XOR_6(n) (XOR_5(n) ^ ((n) >> 6))
+#define XOR_7(n) (XOR_6(n) ^ ((n) >> 7))
+#define CRC(n) (0x0000u \
+	^ (-(XOR_0(n) & 1u) & (CRC16_POLY >> 7)) \
+	^ (-(XOR_1(n) & 1u) & (CRC16_POLY >> 6)) \
+	^ (-(XOR_2(n) & 1u) & (CRC16_POLY >> 5)) \
+	^ (-(XOR_3(n) & 1u) & (CRC16_POLY >> 4)) \
+	^ (-(XOR_4(n) & 1u) & (CRC16_POLY >> 3)) \
+	^ (-(XOR_5(n) & 1u) & (CRC16_POLY >> 2)) \
+	^ (-(XOR_6(n) & 1u) & (CRC16_POLY >> 1)) \
+	^ (-(XOR_7(n) & 1u) & (CRC16_POLY >> 0)))
 #else
 #define XOR(a) (((a) >> 1) ^ (-((a) & 1u) & CRC16_POLY))
-#define CRC0(n) XOR(XOR(XOR(XOR(XOR(XOR(XOR(XOR(n))))))))
+#define CRC(n) XOR(XOR(XOR(XOR(XOR(XOR(XOR(XOR(n))))))))
 #endif
 
-#define CRC1(n) CRC0(n), CRC0((n) ^ (0x01u << 0))
-#define CRC2(n) CRC1(n), CRC1((n) ^ (0x01u << 1))
-#define CRC3(n) CRC2(n), CRC2((n) ^ (0x01u << 2))
-#define CRC4(n) CRC3(n), CRC3((n) ^ (0x01u << 3))
-#define CRC5(n) CRC4(n), CRC4((n) ^ (0x01u << 4))
-#define CRC6(n) CRC5(n), CRC5((n) ^ (0x01u << 5))
-#define CRC7(n) CRC6(n), CRC6((n) ^ (0x01u << 6))
-#define CRC8(n) CRC7(n), CRC7((n) ^ (0x01u << 7))
+#define ELEMS_0(n) CRC(n)
+#define ELEMS_1(n) ELEMS_0(n), ELEMS_0((n) ^ (0x01u << 0))
+#define ELEMS_2(n) ELEMS_1(n), ELEMS_1((n) ^ (0x01u << 1))
+#define ELEMS_3(n) ELEMS_2(n), ELEMS_2((n) ^ (0x01u << 2))
+#define ELEMS_4(n) ELEMS_3(n), ELEMS_3((n) ^ (0x01u << 3))
+#define ELEMS_5(n) ELEMS_4(n), ELEMS_4((n) ^ (0x01u << 4))
+#define ELEMS_6(n) ELEMS_5(n), ELEMS_5((n) ^ (0x01u << 5))
+#define ELEMS_7(n) ELEMS_6(n), ELEMS_6((n) ^ (0x01u << 6))
+#define ELEMS_8(n) ELEMS_7(n), ELEMS_7((n) ^ (0x01u << 7))
 
-static const unsigned int table[0x100] = { CRC8(0x00u) };
+static const unsigned int table[0x100] = { ELEMS_8(0x00u) };
 
 unsigned int crc16(unsigned int crc, const void *message, size_t length)
 {
